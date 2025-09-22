@@ -1,0 +1,233 @@
+# pyPDFCompress
+
+A powerful and user-friendly PDF compression tool with a modern GUI that helps you reduce PDF file sizes while maintaining quality. Perfect for reducing file sizes for email attachments, web uploads, or storage optimization.
+
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Python](https://img.shields.io/badge/python-3.7+-green.svg)
+![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey.svg)
+
+## ✨ Features
+
+- **Intelligent Compression**: Automatically adjusts DPI and JPEG quality to meet your target file size
+- **Batch Processing**: Compress multiple PDFs simultaneously with multi-threading support
+- **Target Size Control**: Set your desired output size in MB for precise compression
+- **Multi-language Support**: Available in English, Portuguese (Brazil), and Spanish
+- **Progress Tracking**: Real-time progress indicator with detailed status updates
+- **Smart File Handling**: Automatic duplicate detection and conflict resolution
+- **Cross-platform**: Works on Windows, macOS, and Linux
+- **User-friendly GUI**: Clean, intuitive interface built with Tkinter
+- **Persistent Settings**: Remembers your preferences between sessions
+
+## 🚀 Quick Start
+
+### Option 1: Download Pre-built Executable
+1. Download the latest release for your platform from the [Releases](../../releases) page
+2. Extract the archive to your desired location
+3. Run `pyPDFCompress.exe` (Windows) or the appropriate executable for your platform
+4. No Python installation required!
+
+### Option 2: Run from Source
+1. Clone this repository or download the source code
+2. Install the required dependencies (see [Installation](#installation))
+3. Run `python pyPDFCompress.py`
+
+## 📋 Installation
+
+### Prerequisites
+- Python 3.7 or higher
+- pip package manager
+
+### Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+Or install manually:
+
+```bash
+pip install PyMuPDF Pillow reportlab configparser
+```
+
+### Required Dependencies
+- **PyMuPDF (fitz)**: PDF processing and rendering
+- **Pillow (PIL)**: Image processing and JPEG compression
+- **reportlab**: PDF generation and canvas operations
+- **configparser**: Configuration file management
+- **tkinter**: GUI framework (usually included with Python)
+
+## 🎯 Usage
+
+### Basic Usage
+1. Launch the application
+2. Click "Select PDFs..." to choose your PDF files
+3. Set your target size in MB (default: 20 MB)
+4. Click "Compress" to start the process
+5. Compressed files will be saved to `App/YYYY-MM-DD/` folder
+6. The output folder will open automatically when complete
+
+### Advanced Features
+
+#### Target Size Settings
+- Set any target size in MB (e.g., 5.5 for 5.5 MB)
+- The tool will automatically adjust compression parameters
+- Smaller targets may result in lower image quality
+
+#### Language Support
+- Switch between English, Portuguese (PT-BR), and Spanish (ES)
+- Language preference is saved automatically
+- All interface elements update dynamically
+
+#### Batch Processing
+- Select multiple PDFs at once
+- Files are processed in parallel for faster completion
+- Invalid PDFs are automatically filtered out
+- Progress tracking shows overall completion status
+
+### Output Structure
+```
+App/
+└── YYYY-MM-DD/
+    ├── document1.pdf
+    ├── document2.pdf
+    └── ...
+```
+
+## ⚙️ Configuration
+
+The application automatically creates a `config.ini` file to store your preferences:
+
+```ini
+[app]
+language = en
+target_mb = 20.0
+```
+
+### Configuration Options
+- **language**: Interface language (`en`, `pt-br`, `es`)
+- **target_mb**: Default target file size in megabytes
+
+## 🔧 Building Executables
+
+Use the included build script to create standalone executables:
+
+```bash
+python build.py
+```
+
+### Build Requirements
+- PyInstaller: `pip install pyinstaller`
+- Icon file: `pdf.ico` (must be present in the project directory)
+
+### Supported Platforms
+- **Windows**: Creates `.exe` executable
+- **macOS**: Creates `.app` bundle  
+- **Linux**: Creates standalone binary
+
+The build script automatically:
+- Detects your platform and architecture
+- Creates appropriate executable format
+- Includes all dependencies
+- Adds application icon
+- Outputs to `dist/` directory
+
+## 🎨 Compression Algorithm
+
+The tool uses an intelligent multi-stage compression approach:
+
+1. **DPI Optimization**: Adjusts image resolution based on compression ratio
+   - High quality: 300-150 DPI
+   - Medium quality: 250-80 DPI  
+   - High compression: 120-60 DPI
+
+2. **JPEG Quality Tuning**: Binary search algorithm finds optimal quality
+   - Range: 40-95% quality
+   - Balances file size vs. image quality
+   - Multiple iterations for precision
+
+3. **Multi-threading**: Parallel image processing for faster compression
+
+4. **Smart Fallbacks**: If target size cannot be met, returns best possible result
+
+## 🌍 Localization
+
+Currently supported languages:
+- **English (en)**: Default language
+- **Portuguese Brazil (pt-br)**: Português do Brasil
+- **Spanish (es)**: Español
+
+### Adding New Languages
+1. Add new language dictionary to `TEXTS` in the source code
+2. Include all required translation keys
+3. Add language option to the GUI dropdown
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**"No valid PDF selected"**
+- Ensure your files have `.pdf` extension
+- Check that files are not corrupted
+- Try opening the PDF in another viewer first
+
+**Compression not meeting target size**
+- Very small targets may not be achievable while maintaining readability
+- Try a slightly larger target size
+- Check if the original PDF contains mostly text vs. images
+
+**Application won't start**
+- Verify Python 3.7+ is installed
+- Install all required dependencies
+- Check for missing `pdf.ico` file if building from source
+
+**Slow processing**
+- Large PDFs with many high-resolution images take longer
+- Close other applications to free up system resources
+- Consider processing files in smaller batches
+
+### Error Reporting
+If you encounter bugs or issues:
+1. Check the console output for error messages
+2. Verify all dependencies are installed correctly
+3. Test with a simple, small PDF file first
+4. Report issues with sample files and error messages
+
+## 🤝 Contributing
+
+Contributions are welcome! Here's how you can help:
+
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
+3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
+4. **Push** to the branch (`git push origin feature/amazing-feature`)
+5. **Open** a Pull Request
+
+### Development Setup
+```bash
+git clone https://github.com/yourusername/pyPDFCompress.git
+cd pyPDFCompress
+pip install -r requirements.txt
+python pyPDFCompress.py
+```
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👨‍💻 Author
+
+**Alex 'OAleex' Félix**
+
+## 🙏 Acknowledgments
+
+- PyMuPDF team for excellent PDF processing capabilities
+- Pillow contributors for image processing functionality
+- ReportLab team for PDF generation tools
+- The Python community for amazing libraries and support
+
+## 📈 Version History
+
+- **v1.0.0**: Initial release with basic compression functionality
+- **v1.1.0**: Added multi-language support and batch processing
+- **v1.2.0**: Improved compression algorithm and progress tracking
+- **v1.3.0**: Added configuration persistence and build scripts

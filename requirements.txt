@@ -1,0 +1,7 @@
+PyMuPDF
+Pillow
+reportlab
+configparser
+PyInstaller
+wheel
+setuptools
